@@ -1,0 +1,22 @@
+{
+  "name": "firedanger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Wes Johnson <wes@swj.io>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "workers/**",
+    "site/**"
+  ],
+  "devDependencies": {
+    "shpjs": "^4.0.4",
+    "wrangler": "^2.0.29"
+  },
+  "scripts": {
+    "dev": "pushd site && yarn dev",
+    "build": "pushd site && yarn build",
+    "preview": "pushd site && yarn preview",
+    "push": "pushd site && yarn push"
+  }
+}
