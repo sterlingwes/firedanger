@@ -61,16 +61,17 @@ const getLocation = async (lat: number, lon: number) => {
   }
 };
 
-if (navigator.geolocation) {
-  showToast("Requesting your location to show current danger");
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      console.log({ position });
-      getLocation(position.coords.latitude, position.coords.longitude);
-    },
-    (positionError) => {
-      hideToast();
-      console.log({ positionError });
-    }
-  );
-}
+// if (navigator.geolocation) {
+//   showToast("Requesting your location to show current danger");
+//   navigator.geolocation.getCurrentPosition(
+//     (position) => {
+//       hideToast();
+//       console.log({ position });
+//       getLocation(position.coords.latitude, position.coords.longitude);
+//     },
+//     (positionError) => {
+//       hideToast();
+//       console.log({ positionError });
+//     }
+//   );
+// }
