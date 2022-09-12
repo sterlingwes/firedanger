@@ -106,7 +106,7 @@ button:focus-visible {
 .about {
   display: block;
   padding: 20px;
-  background: linear-gradient(180deg, darkred, #242424 95%);
+  background: linear-gradient(180deg, darkred, #242424 50%);
 }
 
 #map {
