@@ -17,6 +17,7 @@
     "dev": "pushd site && yarn dev",
     "build": "pushd site && yarn build",
     "preview": "pushd site && yarn preview",
-    "push": "pushd site && yarn push"
+    "push": "pushd site && yarn push",
+    "fetch-fdr": "scripts/fetch-fdr.sh"
   }
 }

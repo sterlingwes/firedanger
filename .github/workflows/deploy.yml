@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: sterlingwes/firedanger/.github/actions/yarn-install@main
+
+      - name: Pull latest FDR file
+        run: yarn fetch-fdr
+
+      - name: Build
+        run: yarn build
+
+      - name: Publish
+        run: yarn push
