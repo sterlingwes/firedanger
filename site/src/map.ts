@@ -3,6 +3,8 @@ import { fromLonLat } from "ol/proj";
 import { boundingExtent } from "ol/extent";
 import GeoJSON from "ol/format/GeoJSON";
 import { Style, Fill, Stroke } from "ol/style";
+import { defaults, DragPan, MouseWheelZoom } from "ol/interaction";
+import { platformModifierKeyOnly } from "ol/events/condition";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { OSM, Vector as VectorSource } from "ol/source";
 
@@ -110,6 +112,19 @@ const extent = boundingExtent([canadaExtent.topLeft, canadaExtent.bottomRight]);
 
 const map = new Map({
   target: "map",
+  interactions: defaults({ dragPan: false, mouseWheelZoom: false }).extend([
+    new DragPan({
+      condition: function (event) {
+        return (
+          event.originalEvent.pointerType === "mouse" ||
+          (this as any).getPointerCount() === 2
+        );
+      },
+    }),
+    new MouseWheelZoom({
+      condition: platformModifierKeyOnly,
+    }),
+  ]),
   layers: [
     new TileLayer({
       source: new OSM(),
@@ -121,7 +136,19 @@ const map = new Map({
   }),
 });
 
-const constrainView = () => map.getView().fit(extent, { size: map.getSize() });
+// map.on("moveend", () => {
+//   const zoom = map.getView().getZoom();
+//   console.log({ zoom });
+// });
+
+const constrainView = () => {
+  map.getView().fit(extent, { size: map.getSize() });
+  const initialZoom = map.getView().getZoom();
+  if (typeof initialZoom === "number") {
+    const minZoom = Math.floor(initialZoom);
+    map.getView().setMinZoom(minZoom);
+  }
+};
 
 window.onresize = () => {
   constrainView();
