@@ -14,10 +14,10 @@
     "wrangler": "^2.0.29"
   },
   "scripts": {
-    "dev": "pushd site && yarn dev",
-    "build": "pushd site && yarn build",
-    "preview": "pushd site && yarn preview",
-    "push": "pushd site && yarn push",
+    "dev": "cd site && yarn dev",
+    "build": "cd site && yarn build",
+    "preview": "cd site && yarn preview",
+    "push": "cd site && yarn push",
     "fetch-fdr": "scripts/fetch-fdr.sh"
   }
 }
