@@ -160,11 +160,22 @@ button:focus-visible {
 }
 
 .rating-name {
-  flex: 1;
+  min-width: 120px;
 }
 
 .rating-description {
-  flex: 3;
+  flex: 1;
+}
+
+.rating-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+  background-color: #222;
 }
 
 @keyframes toastin {

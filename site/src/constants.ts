@@ -8,24 +8,24 @@ export enum DangerRating {
 
 export const dangerColours = Object.freeze({
   [DangerRating.Low]: {
-    stroke: "#0000ff",
-    fill: "#0000ff80",
+    stroke: "hsla(235, 92%, 53%, 1)",
+    fill: "hsla(235, 92%, 53%, 0.5)",
   },
   [DangerRating.Moderate]: {
-    stroke: "#00E300",
-    fill: "#00E30080",
+    stroke: "hsla(266, 92%, 53%, 1)",
+    fill: "hsla(266, 92%, 53%, 0.5)",
   },
   [DangerRating.High]: {
-    stroke: "#ffff00",
-    fill: "#ffff0080",
+    stroke: "hsla(297, 92%, 53%, 1)",
+    fill: "hsla(297, 92%, 53%, 0.5)",
   },
   [DangerRating.VeryHigh]: {
-    stroke: "#cc9900",
-    fill: "#cc990080",
+    stroke: "hsla(328, 92%, 53%, 1)",
+    fill: "hsla(328, 92%, 53%, 0.5)",
   },
   [DangerRating.Extreme]: {
-    stroke: "#ff0000",
-    fill: "#ff000080",
+    stroke: "hsla(359, 92%, 53%, 1)",
+    fill: "hsla(359, 92%, 53%, 0.5)",
   },
 });
 

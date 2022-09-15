@@ -166,6 +166,17 @@ const showLocationDetail = ({
   if (ratingLabel) {
     ratingLabel.innerHTML = dangerLabel[dangerRating];
   }
+
+  const ratingDots = document.getElementsByClassName("rating-dot");
+  Array.from(ratingDots).forEach((dot) => {
+    const classes = dot.className.split(" ");
+    const dotClass = classes.find((cls) => cls.startsWith("dot-"));
+    if (dotClass) {
+      const [, code] = dotClass.split("-");
+      (dot as HTMLDivElement).style.background =
+        dangerColours[Number(code) as DangerRating].stroke;
+    }
+  });
 };
 
 const findCoordinateInZones = () => {
