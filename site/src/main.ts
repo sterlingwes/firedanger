@@ -208,7 +208,9 @@ if (navigator.geolocation && !priorLocation) {
       hideToast();
       console.log({ position });
       saveLocation("", [position.coords.latitude, position.coords.longitude]);
-      getLocation(position.coords.latitude, position.coords.longitude);
+      getLocation(position.coords.latitude, position.coords.longitude).then(
+        () => findCoordinateInZones()
+      );
     },
     (positionError) => {
       hideToast();
