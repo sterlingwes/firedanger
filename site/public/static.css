@@ -1,0 +1,222 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: gold;
+  text-decoration: inherit;
+}
+a:hover {
+  color: yellow;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid darkred;
+}
+
+html,
+body {
+  width: 100vw;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.header {
+  background-color: darkred;
+  display: block;
+  width: 100%;
+  padding-left: 40px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.about {
+  display: block;
+  flex: 1;
+  padding: 20px;
+}
+
+#map {
+  background-color: #b2d2dd;
+  width: 100%;
+  height: 500px;
+}
+
+#map-info {
+  font-size: 12px;
+  line-height: 18px;
+  padding-bottom: 12px;
+}
+
+.toast {
+  animation-duration: 0.5s;
+  animation-name: toastin;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+
+  position: absolute;
+  top: 80px;
+  opacity: 0;
+  margin: auto;
+  background-color: palegoldenrod;
+  color: #213547;
+  padding: 8px 18px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px #24242480;
+}
+
+.content {
+  width: 100%;
+  background: linear-gradient(180deg, darkred, #242424 50%);
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.location-rating {
+  transition: opacity 0.5s ease-in-out;
+  display: none;
+  padding: 5px 20px;
+  opacity: 0;
+}
+
+.location-rating.show {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.location-rating.fade-in {
+  opacity: 1;
+}
+
+.rating-row {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgb(70, 24, 24);
+}
+
+.rating-row.last {
+  border-bottom: none;
+}
+
+.rating-name {
+  min-width: 120px;
+}
+
+.rating-description {
+  flex: 1;
+}
+
+.rating-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+  background-color: #222;
+}
+
+@keyframes toastin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.toast-exit {
+  animation-name: toastout;
+}
+
+@keyframes toastout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 800px) {
+  .content-row {
+    display: block;
+  }
+}

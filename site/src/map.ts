@@ -9,58 +9,65 @@ import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { OSM, Vector as VectorSource } from "ol/source";
 
 import geojsonObject from "../../files/fdr.json";
+import { dangerColours, DangerRating } from "./constants";
 
 const lineWidth = 2;
+
+const lowColour = dangerColours[DangerRating.Low];
+const moderateColour = dangerColours[DangerRating.Moderate];
+const highColour = dangerColours[DangerRating.High];
+const veryHighColour = dangerColours[DangerRating.VeryHigh];
+const extremeColour = dangerColours[DangerRating.Extreme];
 
 const gridCodeStyles = Object.freeze({
   // LOW
   0: new Style({
     stroke: new Stroke({
-      color: "#0000ff",
+      color: lowColour.stroke,
       width: lineWidth,
     }),
     fill: new Fill({
-      color: "#0000ff80",
+      color: lowColour.fill,
     }),
   }),
   // MODERATE
   1: new Style({
     stroke: new Stroke({
-      color: "#00E300",
+      color: moderateColour.stroke,
       width: lineWidth,
     }),
     fill: new Fill({
-      color: "#00E30080",
+      color: moderateColour.fill,
     }),
   }),
   // HIGH
   2: new Style({
     stroke: new Stroke({
-      color: "#ffff00",
+      color: highColour.stroke,
       width: lineWidth,
     }),
     fill: new Fill({
-      color: "#ffff0080",
+      color: highColour.fill,
     }),
   }),
   // VERY HIGH
   3: new Style({
     stroke: new Stroke({
-      color: "#cc9900",
+      color: veryHighColour.stroke,
       width: lineWidth,
     }),
     fill: new Fill({
-      color: "#cc990080",
+      color: veryHighColour.fill,
     }),
   }),
   // EXTREME
   4: new Style({
     stroke: new Stroke({
-      color: "#ff0000",
+      color: extremeColour.stroke,
       width: lineWidth,
     }),
     fill: new Fill({
-      color: "#ff000080",
+      color: extremeColour.fill,
     }),
   }),
 });
