@@ -29,6 +29,11 @@ hr {
   border-top: 1px solid darkred;
 }
 
+html,
+body {
+  width: 100vw;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -72,12 +77,16 @@ button:focus-visible {
 .header h1 {
   font-size: 24px;
   font-weight: 600;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .about {
   display: block;
+  flex: 1;
   padding: 20px;
-  background: linear-gradient(180deg, darkred, #242424 50%);
 }
 
 #map {
@@ -107,6 +116,55 @@ button:focus-visible {
   padding: 8px 18px;
   border-radius: 4px;
   box-shadow: 2px 2px 5px #24242480;
+}
+
+.content {
+  width: 100%;
+  background: linear-gradient(180deg, darkred, #242424 50%);
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.location-rating {
+  transition: opacity 0.5s ease-in-out;
+  display: none;
+  padding: 5px 20px;
+  opacity: 0;
+}
+
+.location-rating.show {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.location-rating.fade-in {
+  opacity: 1;
+}
+
+.rating-row {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgb(70, 24, 24);
+}
+
+.rating-row.last {
+  border-bottom: none;
+}
+
+.rating-name {
+  flex: 1;
+}
+
+.rating-description {
+  flex: 3;
 }
 
 @keyframes toastin {
@@ -143,5 +201,11 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 800px) {
+  .content-row {
+    display: block;
   }
 }

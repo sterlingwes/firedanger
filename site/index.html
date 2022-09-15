@@ -3,30 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/fire.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
     <title>firedanger.ca</title>
     <link rel="stylesheet" type="text/css" href="/static.css" />
   </head>
   <body>
     <noscript>This page requires javascript. Sorry.</noscript>
-    <div class="header"><h1>Fire Danger Ratings in Canada</h1></div>
+    <div class="header"><h1>Canadian Fire Danger Rating</h1></div>
     <div id="map"></div>
-    <div class="about">
-      <div id="map-info"></div>
-      <hr />
-      <h2>About firedanger.ca</h2>
-      <p>
-        As the global climate continues to change, wild fires are increasingly a
-        risk humans face in all parts of the world. In Canada, our vast forests
-        and grasslands provide ample fuel for this trend to continue. Whether
-        you're in a rural area, a suburb, or a city - wild fires can affect you.
-        They can endanger your home up close and they can pollute the air you
-        breathe from afar.
-      </p>
-      <p>
-        This site will leverage some of the open data sources available to alert
-        you to any risks to your area.
-      </p>
+    <div class="content">
+      <div class="content-row">
+        <div class="location-rating" id="location-rating">
+          <h2>Current Danger Rating for your location</h2>
+          <div id="rating-bar">
+            <div class="rating-arrow"></div>
+          </div>
+          <div id="rating-label">Unknown</div>
+          <p>
+            <i>Disclaimer</i> - The location provided by your browser may be
+            inaccurate or you may be on the border of a different danger rating
+            area. Confirm with your local fire authorities before relying on
+            this rating for your location.
+          </p>
+          <div class="rating-legend">
+            <h3>Rating Legend</h3>
+            <div class="rating-row">
+              <div class="rating-name">Low</div>
+              <div class="rating-description">
+                Fires likely to be self-extinguishing and new ignitions
+                unlikely. Any existing fires limited to smoldering in deep,
+                drier layers.
+              </div>
+            </div>
+            <div class="rating-row">
+              <div class="rating-name">Moderate</div>
+              <div class="rating-description">
+                Creeping or gentle surface fires. Fires easily contained by
+                ground crews with pumps and hand tools.
+              </div>
+            </div>
+            <div class="rating-row">
+              <div class="rating-name">High</div>
+              <div class="rating-description">
+                Moderate to vigorous surface fire. Challenging for ground crews
+                to handle; heavy equipment (bulldozers, tanker trucks, aircraft)
+                often required to contain fire.
+              </div>
+            </div>
+            <div class="rating-row">
+              <div class="rating-name">Very High</div>
+              <div class="rating-description">
+                High-intensity fire. Head fire conditions beyond the ability of
+                ground crews, requires air crews.
+              </div>
+            </div>
+            <div class="rating-row last">
+              <div class="rating-name">Extreme</div>
+              <div class="rating-description">
+                Fast-spreading, high-intensity fire. Very difficult to control.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about">
+          <div id="map-info"></div>
+          <hr />
+          <h2>About firedanger.ca</h2>
+          <p>
+            As the global climate continues to change, wild fires are
+            increasingly a risk we face in all parts of the world. In Canada,
+            our vast forests and grasslands provide ample fuel for this trend to
+            continue. Whether you're in a rural area, a suburb, or a city - wild
+            fires can affect you. They can endanger your home up close and they
+            can pollute the air you breathe from afar.
+          </p>
+          <p>
+            This site will leverage some of the open data sources available to
+            alert you to any risks to your area.
+          </p>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
