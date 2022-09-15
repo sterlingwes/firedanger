@@ -1,5 +1,5 @@
 import booleanWithin from "@turf/boolean-within";
-import { point, polygon, BBox, Position } from "@turf/helpers";
+import { point, polygon, FeatureCollection, Polygon } from "@turf/helpers";
 
 import "./style.css";
 import "./map";
@@ -7,22 +7,8 @@ import fdrMeta from "../../files/date.json";
 import fdrJson from "../../files/fdr.json";
 import { dangerColours, dangerLabel, DangerRating } from "./constants";
 
-interface GeoJsonFeature {
-  type: "Feature";
-  geometry: {
-    bbox: BBox;
-    type: string;
-    coordinates: Position[][];
-    properties: Record<string, any>;
-  };
-}
-
-interface GeoJsonFeatureCollection {
-  type: "FeatureCollection";
-  features: GeoJsonFeature[];
-}
-
-const fdrGeoJson = fdrJson as GeoJsonFeatureCollection;
+// @ts-ignore BBox type conflict with inferred JSON type
+const fdrGeoJson = fdrJson as FeatureCollection<Polygon, { GRIDCODE: number }>;
 
 const { date } = fdrMeta;
 const currentYear = new Date().getFullYear();
@@ -192,8 +178,8 @@ const findCoordinateInZones = () => {
         return;
       }
 
-      const { coordinates, properties, bbox } = geoFeature.geometry;
-      const poly = polygon(coordinates, properties, { bbox });
+      const { coordinates, bbox } = geoFeature.geometry;
+      const poly = polygon(coordinates, geoFeature.properties, { bbox });
 
       return booleanWithin(pos, poly);
     });
