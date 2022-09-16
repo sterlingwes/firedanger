@@ -1,3 +1,4 @@
+import area from "@turf/area";
 import booleanWithin from "@turf/boolean-within";
 import { point, polygon, FeatureCollection, Polygon } from "@turf/helpers";
 
@@ -200,6 +201,41 @@ const findCoordinateInZones = () => {
     });
   }
 };
+
+const canadaSquareMeters = 9_984_670_000_000;
+const areaLookup = {} as Record<DangerRating, number>;
+
+fdrGeoJson.features.forEach((feature) => {
+  const sqMeters = area(feature);
+  const code = feature.properties.GRIDCODE;
+  if (DangerRating[code]) {
+    if (typeof areaLookup[code as DangerRating] !== "number") {
+      areaLookup[code as DangerRating] = 0;
+    }
+    areaLookup[code as DangerRating] += sqMeters;
+  }
+});
+
+const totalCoverage = Object.values(areaLookup).reduce(
+  (sum, num) => sum + num,
+  0
+);
+const pctOfCanada = totalCoverage / canadaSquareMeters;
+const pctLookup = Object.keys(areaLookup).reduce(
+  (acc, code) => ({
+    ...acc,
+    [code]: areaLookup[Number(code) as DangerRating] / totalCoverage,
+  }),
+  {}
+);
+
+console.log({
+  areaLookup,
+  totalCoverage,
+  canadaSquareMeters,
+  pctOfCanada,
+  pctLookup,
+});
 
 if (navigator.geolocation && !priorLocation) {
   showToast("Requesting your location to show current danger rating");

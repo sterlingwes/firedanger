@@ -15,6 +15,7 @@
     "vite": "^3.1.0"
   },
   "dependencies": {
+    "@turf/area": "^6.5.0",
     "@turf/boolean-within": "^6.5.0",
     "ol": "^7.1.0"
   }
