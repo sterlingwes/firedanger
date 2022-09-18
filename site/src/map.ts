@@ -143,6 +143,17 @@ const map = new Map({
   }),
 });
 
+const spinner = document.getElementById("map-spinner");
+spinner?.classList.add("show");
+
+map.on("loadend", () => {
+  spinner?.classList.add("hide");
+  setTimeout(() => {
+    spinner?.classList.add("gone");
+    spinner?.classList.remove("show", "hide");
+  }, 1000);
+});
+
 // map.on("moveend", () => {
 //   const zoom = map.getView().getZoom();
 //   console.log({ zoom });
