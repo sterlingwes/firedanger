@@ -9,9 +9,14 @@
     "preview": "vite preview",
     "push": "wrangler pages publish --project-name firedanger --branch main dist",
     "typecheck": "tsc --noEmit",
-    "gather-stats": "node --loader ts-node/esm scripts/gather-district-stats.ts"
+    "gather-stats": "node --loader ts-node/esm scripts/gather-district-stats.ts",
+    "specific": "node --loader ts-node/esm scripts/get-specific-rating.ts"
   },
   "devDependencies": {
+    "@swc/core": "^1.3.1",
+    "@swc/helpers": "^0.4.11",
+    "@types/nodemailer": "^6.4.6",
+    "nodemailer": "^6.7.8",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   },
