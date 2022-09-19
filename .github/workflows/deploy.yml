@@ -17,6 +17,9 @@ jobs:
       - name: Pull latest FDR file
         run: yarn fetch-fdr
 
+      - name: Pull districts
+        run: ./scripts/download-districts.sh
+
       - name: Build
         run: yarn build
 
