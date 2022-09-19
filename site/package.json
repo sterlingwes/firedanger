@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "push": "wrangler pages publish --project-name firedanger --branch main dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "gather-stats": "node --loader ts-node/esm scripts/gather-district-stats.ts"
   },
   "devDependencies": {
     "typescript": "^4.6.4",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@turf/area": "^6.5.0",
+    "@turf/boolean-intersects": "^6.5.0",
     "@turf/boolean-within": "^6.5.0",
     "ol": "^7.1.0"
   }

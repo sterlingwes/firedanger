@@ -1,17 +1,13 @@
 const shp = require("shpjs");
 
-const zipBuffer = require("fs").readFileSync("files/fdr.zip");
+const filepath = process.argv.slice(0).pop();
+if (filepath.endsWith("zip") === false) {
+  console.log("! Expected a ZIP file path");
+  process.exit(1);
+}
+
+const zipBuffer = require("fs").readFileSync(filepath);
+
 shp(zipBuffer).then((geojson) => {
-  console.log(JSON.stringify(geojson, null, 2));
+  console.log(JSON.stringify(geojson));
 });
-
-// const shpBuffer = require("fs").readFileSync("files/fdr.shp");
-// const dbfBuffer = require("fs").readFileSync("files/fdr.dbf");
-
-// const shpJson = shp.combine([shp.parseShp(shpBuffer), shp.parseDbf(dbfBuffer)]);
-
-// console.log(JSON.stringify(shpJson, null, 2));
-
-// shp("files/fdr.zip").then(function (geojson) {
-//   console.log({ geojson });
-// });
