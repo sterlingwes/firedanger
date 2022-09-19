@@ -20,6 +20,15 @@ const veryHighColour = dangerColours[DangerRating.VeryHigh];
 const extremeColour = dangerColours[DangerRating.Extreme];
 
 const gridCodeStyles = Object.freeze({
+  fallback: new Style({
+    stroke: new Stroke({
+      color: "#222",
+      width: lineWidth,
+    }),
+    fill: new Fill({
+      color: "rgba(20,20,200.3)",
+    }),
+  }),
   // LOW
   0: new Style({
     stroke: new Stroke({
@@ -81,6 +90,10 @@ const supportedGridCodes = Object.keys(gridCodeStyles);
 
 const styleFunction = function (feature: any) {
   const gridCode = feature.values_.GRIDCODE;
+  if (typeof gridCode !== "number") {
+    return styles.Polygon.fallback;
+  }
+
   const featureType = feature.getGeometry().getType();
 
   if (
