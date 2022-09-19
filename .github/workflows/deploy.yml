@@ -18,7 +18,7 @@ jobs:
         run: yarn fetch-fdr
 
       - name: Pull districts
-        run: ./scripts/download-districts.sh
+        run: yarn wrangler r2 object get firedanger/districts.json -f files/districts.json
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
