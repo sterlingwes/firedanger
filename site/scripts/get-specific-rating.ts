@@ -118,4 +118,11 @@ if (result) {
   );
 }
 
-sendReport(JSON.stringify({ result, weightings }, null, 2));
+const zoneAreaSum = Object.values(result ?? {}).reduce(
+  (sum, area) => sum + (typeof area === "number" ? area : 0),
+  0
+);
+
+if (zoneAreaSum > 0) {
+  sendReport(JSON.stringify({ result, weightings }, null, 2));
+}
