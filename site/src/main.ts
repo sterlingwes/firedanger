@@ -1,15 +1,21 @@
 import area from "@turf/area";
 import booleanWithin from "@turf/boolean-within";
+import booleanIntersects from "@turf/boolean-intersects";
 import { point, polygon, FeatureCollection, Polygon } from "@turf/helpers";
 
 import "./style.css";
 import "./map";
 import fdrMeta from "../../files/date.json";
 import fdrJson from "../../files/fdr.json";
+import districtJson from "../../files/districts.json";
 import { dangerColours, dangerLabel, DangerRating } from "./constants";
 
 // @ts-ignore BBox type conflict with inferred JSON type
 const fdrGeoJson = fdrJson as FeatureCollection<Polygon, { GRIDCODE: number }>;
+const districtGeoJson = districtJson as FeatureCollection<
+  Polygon,
+  { FEDENAME: string }
+>;
 
 const { date } = fdrMeta;
 const currentYear = new Date().getFullYear();
@@ -166,6 +172,68 @@ const showLocationDetail = ({
   });
 };
 
+const findDistrictAndRatings = (coords: number[]) => {
+  const foundDistrict = districtGeoJson.features.find((geoFeature) => {
+    if (geoFeature.geometry.type !== "Polygon") {
+      console.warn(
+        "skipping geojson feature that is not a polygon",
+        geoFeature
+      );
+      return;
+    }
+
+    const [lat, lon] = coords;
+    const pos = point([lon, lat]);
+    const { coordinates, bbox } = geoFeature.geometry;
+    const poly = polygon(coordinates, geoFeature.properties, { bbox });
+
+    return booleanWithin(pos, poly);
+  });
+
+  if (!foundDistrict) {
+    return;
+  }
+
+  console.log({ foundDistrict });
+
+  const districtPoly = polygon(
+    foundDistrict.geometry.coordinates,
+    foundDistrict.properties,
+    { bbox: foundDistrict.geometry.bbox }
+  );
+
+  const foundRatingZones = fdrGeoJson.features.filter((geoFeature) => {
+    if (geoFeature.geometry.type !== "Polygon") {
+      console.warn(
+        "skipping geojson feature that is not a polygon",
+        geoFeature
+      );
+      return;
+    }
+
+    const { coordinates, bbox } = geoFeature.geometry;
+    const fdrPoly = polygon(coordinates, geoFeature.properties, { bbox });
+
+    return booleanIntersects(districtPoly, fdrPoly);
+  });
+
+  return foundRatingZones
+    .map((zoneFeature) => {
+      return {
+        gridCode: zoneFeature.properties.GRIDCODE,
+        area: area(zoneFeature),
+      };
+    })
+    .reduce(
+      (acc, { gridCode, area }) => ({
+        ...acc,
+        [gridCode]:
+          typeof acc[gridCode] === "number" ? acc[gridCode] + area : area,
+      }),
+      {} as Record<number, number>
+    );
+};
+
 const findCoordinateInZones = () => {
   if (priorLocation?.coords) {
     const [lat, lon] = priorLocation.coords;
@@ -194,6 +262,9 @@ const findCoordinateInZones = () => {
       console.warn("invalid GRIDCODE received for polygon match:", gridCode);
       return;
     }
+
+    const foundZones = findDistrictAndRatings(priorLocation.coords);
+    console.log({ foundZones });
 
     showLocationDetail({
       location: priorLocation.location,
