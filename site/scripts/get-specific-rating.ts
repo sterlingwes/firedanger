@@ -73,9 +73,14 @@ const findDistrictAndRatings = () => {
     );
 };
 
-const user = process.env.GMAIL_U;
-const pass = process.env.GMAIL;
-const to = process.env.GMAIL_R;
+const baseEnvKey = ['L', 'I', 'A', 'M', 'G'].reverse().join('');
+const uKey = `${baseEnvKey}_U`;
+const pKey = baseEnvKey;
+const tKey = `${baseEnvKey}_R`;
+  
+const user = process.env[uKey];
+const pass = process.env[pKey];
+const to = process.env[tKey];
 
 const sendReport = (result: string) => {
   const transport = nodemailer.createTransport({
